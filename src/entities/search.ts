@@ -1,6 +1,7 @@
 import { ISearch } from "../interfaces/ISearch";
 import { getItem, putItem } from "../helpers/dynamoHelper";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import fetch from "node-fetch";
 
 const TABLE_NAME: string = process.env.TABLE_NAME || "";
 
