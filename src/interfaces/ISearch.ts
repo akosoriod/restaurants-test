@@ -3,6 +3,6 @@ export interface ISearch {
     lat: string;
     long: string;
     radius:string;
-    places?: string[]
+    results?: any[]
 
 }

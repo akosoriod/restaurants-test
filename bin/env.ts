@@ -27,7 +27,7 @@ const getEnvVariables = (dependentVariables: any) => {
         region: AWS_CURRENT_REGION,
     }
 
-    const REPOSITORY_ARN = `arn:aws:codecommit:${AWS_CURRENT_REGION}:${AWS_ACCOUNT}:${PROJECT_NAME}-API`;
+    const REPOSITORY_ARN = `arn:aws:codecommit:${AWS_CURRENT_REGION}:${AWS_ACCOUNT}:${PROJECT_NAME}`;
     const PIPELINE_NAME = `Pipeline-${PROJECT_NAME}-V${PROJECT_VERSION}-${PROJECT_ENVIRONMENT}`
     const API_NAME = `${PROJECT_NAME}-V${PROJECT_VERSION}-Api-${PROJECT_ENVIRONMENT}`;
     const STACK_NAME = `${PROJECT_NAME}-V${PROJECT_VERSION}-Stack-${PROJECT_ENVIRONMENT}`;
@@ -46,6 +46,7 @@ const getEnvVariables = (dependentVariables: any) => {
         PIPELINE_NAME,
         API_NAME,
         STACK_NAME,
+        MAIN_TABLE_NAME,
         TOKEN_SECRET,
         API_KEY_MAPS
     }
