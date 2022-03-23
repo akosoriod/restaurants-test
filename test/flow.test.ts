@@ -1,7 +1,7 @@
 import { getResponseValue } from "../src/helpers/utilsHelper";
 import { agent as request } from 'supertest';
 import { userInfo } from "os";
-
+/*
 beforeEach(() => {
   jest.resetModules();
 });
@@ -168,3 +168,4 @@ describe('API-USERS-A', () => {
 function ob(ob: any) {
   throw new Error("Function not implemented.");
 }
+*/
