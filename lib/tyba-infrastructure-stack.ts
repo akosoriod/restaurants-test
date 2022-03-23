@@ -8,7 +8,48 @@ export class TybaInfrastructureStack extends cdk.Stack {
 
         super(scope, id, props);
 
+       /*
+        const jwksUri = ssm.StringParameter.fromStringParameterAttributes(
+            this,
+            'jwksURI',
+            {
+                parameterName: 'https://akod.us.auth0.com/.well-known/jwks.json',
+            },
+        ).stringValue;
 
+        const audience = ssm.StringParameter.fromStringParameterAttributes(
+            this,
+            'audience',
+            {
+                parameterName: 'https://0sdrvcpvi4.execute-api.us-east-1.amazonaws.com',
+            },
+        ).stringValue;
+
+        const tokenIssuer = ssm.StringParameter.fromStringParameterAttributes(
+            this,
+            'tokenIssuer',
+            {
+                parameterName: 'https://akod.us.auth0.com/',
+            },
+        ).stringValue;
+
+        // Lambda Authorizer
+        const auth0AuthorizerFunction = new lambda.Function(
+            this,
+            'auth0AuthorizerFunction',
+            {
+                runtime: lambda.Runtime.NODEJS_12_X,
+                code: lambda.Code.fromAsset(NODE_LAMBDA_SRC_DIR),
+                handler: 'auth/authorizer.handler',
+                layers: [nodeModuleLayer],
+                environment: {
+                    JWKS_URI: jwksUri,
+                    AUDIENCE: audience,
+                    TOKEN_ISSUER: tokenIssuer,
+                },
+            },
+        );
+        */
         // API GATEWAY
 
         const {

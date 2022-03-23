@@ -7,10 +7,8 @@ export const handler: APIGatewayProxyHandler = (event: APIGatewayProxyEvent): Pr
    return getResponse({
         statusCode: 200,
         body: {
-            msg:'Tested'
+            msg:'signin'
         }
     })
-    
-    
 
 });

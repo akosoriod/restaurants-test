@@ -1,13 +1,20 @@
-# Welcome to tyba app - backend
-
-### AWS 
-
-* `cdk synth tyba-V1-InfrastructureStack-development  > template.yaml` Emit the synthesized CloudFormation template
-* `cdk deploy  tyba-V1-InfrastructureStack-development` Create Api in AWS
-* `cdk deploy  tyba-V1-DatabaseStack-development` Create dynamoDB 
-* `cdk deploy  tyba-V1-PipelineStack-development` Create pipeline 
+# Welcome to tyba app - API
 
 
- ### Start the Api locally 
-- `cdk synth TPChain-V1-InfrastructureStack-development --no-staging > template.yaml` Emit the synthesized CloudFormation template
-- `sam local start-api -l logs.log --docker-network dynamo_local_tpchainNetwork` Start Api with logs file and docker network
+* endpoint_example: [API](https://fvs1m6rc69.execute-api.us-east-1.amazonaws.com/prod/v1/searches)
+  
+## Run Local
+
+* `cdk synth Infrastructure-omni-V1-Stack-development > template.yaml`  build proyect and generate yaml architecture file
+* `sam local start-api`   run proyect in local
+
+## Run test
+* `npm run test`    perform the jest unit tests
+
+## Deploy in AWS
+* `cdk deploy Infrastructure-omni-V1-Stack-development` deploy infrastructure stack to your default AWS account/region
+* `cdk deploy Pipeline-omni-V1-Stack-development`       deploy pipeline stack to your default AWS account/region
+
+## Diagram cloud serverless architecture
+<p align="center"><img src="<p align="center"><img src="https://raw.githubusercontent.com/akosoriod/restaurants-test/main/docs/AWS_diagram.png"></p>
+

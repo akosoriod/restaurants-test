@@ -1,8 +1,7 @@
 import {APIGatewayProxyResult} from "aws-lambda";
-import {stringify} from 'flatted';
 
 export const getResponse = (
-    {body, statusCode, error}: { body?: any, statusCode?: number, error?: any, badRequest?: boolean }
+    {body, statusCode, error, badRequest}: { body?: any, statusCode?: number, error?: any, badRequest?: boolean}
 ): APIGatewayProxyResult => {
     const headers = {
         "Content-Type": "application/json",
@@ -14,13 +13,12 @@ export const getResponse = (
 
     if (error) {
         console.log(error);
-        if (process.env.PROJECT_ENVIRONMENT === "master") error = "See internal logs.";
         return {
             body: JSON.stringify({
-                message: "There was an error!",
+                message: "There was an error, see internal logs for full details",
                 error
             }),
-            statusCode: statusCode || 500,
+            statusCode: 500,
             headers
         };
     }

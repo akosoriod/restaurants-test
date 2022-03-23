@@ -23,17 +23,24 @@ export class User implements IUser {
                 TableName: TABLE_NAME,
                 Item: {
                     PK: 'USER',
-                    SK: 'USER#'+this.email,
+                    SK: 'USER#' + this.email,
                     name: this.name,
                     email: this.email,
                     address: this.address,
-                    password: this.password    
+                    password: this.password  //cifrar
                 },
-                ReturnValues: "ALL_NEW"
+                ReturnValues: "ALL_OLD"
             }
-            let res = await putItem(params);
-            console.log (res);
-            return res
+            await putItem(params);
+            const params2: DocumentClient.GetItemInput = {
+                TableName: TABLE_NAME,
+                Key: {
+                    PK: 'USER',
+                    SK: 'USER#' + this.email
+                }
+            }
+            let res = getItem(params2);
+            return res;
         } catch (error) {
             return { error: error }
         }
