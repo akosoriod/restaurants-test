@@ -47,11 +47,11 @@ export class TybaPipelineStack extends Stack {
             }),
         });
 
-       /* const DatabaseStage = new tybaDatabaseStage(this, `Database`, env, {
+        const DatabaseStage = new tybaDatabaseStage(this, `Database`, env, {
             env: env.AWS_ENVIRONMENT
         })
 
-        tybaPipeline.addStage(DatabaseStage);*/
+        tybaPipeline.addStage(DatabaseStage);
 
         const InfrastructureStage = new TybaInfrastructureStage(this, `Infrastructure`, env, {
             env: env.AWS_ENVIRONMENT

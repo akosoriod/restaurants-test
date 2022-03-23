@@ -114,9 +114,7 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
+                TABLE_NAME: env.MAIN_TABLE_NAME
             }
         },
         {baseRoute: opt.routes.signupRoute, path: '', method: "POST"}
@@ -129,9 +127,7 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
+                TABLE_NAME: env.MAIN_TABLE_NAME
             }
         },
         {baseRoute: opt.routes.signinRoute, path: '', method: "POST"}
@@ -144,9 +140,7 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
+                TABLE_NAME: env.MAIN_TABLE_NAME
             }
         },
         {baseRoute: opt.routes.logoutRoute, path: '', method: "POST"}
