@@ -1,0 +1,66 @@
+START RequestId: ebdc7a95-0149-49f3-9a57-e3fc589fea8d Version: $LATEST
+2022-03-23T03:25:54.448Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Runtime.HandlerNotFound","errorMessage":"index.handler is undefined or not exported","stack":["Runtime.HandlerNotFound: index.handler is undefined or not exported","    at Object.module.exports.load (/var/runtime/UserFunction.js:246:11)","    at Object.<anonymous> (/var/runtime/index.js:43:30)","    at Module._compile (internal/modules/cjs/loader.js:1085:14)","    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)","    at Module.load (internal/modules/cjs/loader.js:950:32)","    at Function.Module._load (internal/modules/cjs/loader.js:790:12)","    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)","    at internal/main/run_main_module.js:17:47"]}
+2022-03-23T03:25:54.452Z	undefined	ERROR	(node:14) Warning: Accessing non-existent property 'handler' of module exports inside circular dependency(Use `node --trace-warnings ...` to show where the warning was created)
+time="2022-03-23T03:25:54.454" level=panic msg="ReplyStream not available"
+2022/03/23 03:25:54 http: panic serving 127.0.0.1:45198: &{0xc000148000 map[] 2022-03-23 03:25:54.454763992 +0000 UTC m=+1.115150731 panic <nil> ReplyStream not available <nil> <nil> }
+goroutine 26 [running]:
+net/http.(*conn).serve.func1(0xc0000a9540)
+	/usr/local/go/src/net/http/server.go:1800 +0x139
+panic(0x866640, 0xc0000d40e0)
+	/usr/local/go/src/runtime/panic.go:975 +0x3e3
+github.com/sirupsen/logrus.Entry.log(0xc000148000, 0xc00009a990, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/entry.go:259 +0x335
+github.com/sirupsen/logrus.(*Entry).Log(0xc0000d4000, 0xc000000000, 0xc00020f588, 0x1, 0x1)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/entry.go:287 +0xeb
+github.com/sirupsen/logrus.(*Logger).Log(0xc000148000, 0xc000000000, 0xc00020f588, 0x1, 0x1)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/logger.go:193 +0x7d
+github.com/sirupsen/logrus.(*Logger).Panic(...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/logger.go:234
+github.com/sirupsen/logrus.Panic(...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/exported.go:129
+go.amzn.com/lambda/rapi/rendering.RenderInteropError(0x9097c0, 0xc0000ac1c0, 0xc0000da400, 0x902b60, 0xc00009c330)
+	/LambdaRuntimeLocal/lambda/rapi/rendering/rendering.go:292 +0x9a
+go.amzn.com/lambda/rapi/handler.(*initErrorHandler).ServeHTTP(0xc00009c0a0, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/LambdaRuntimeLocal/lambda/rapi/handler/initerror.go:52 +0x519
+net/http.HandlerFunc.ServeHTTP(0xc000094380, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).routeHTTP(0xc0000a60c0, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:431 +0x278
+net/http.HandlerFunc.ServeHTTP(0xc00009c030, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.RuntimeReleaseMiddleware.func1.1(0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:100 +0xea
+net/http.HandlerFunc.ServeHTTP(0xc000094180, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.AccessLogMiddleware.func1.1(0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:77 +0x170
+net/http.HandlerFunc.ServeHTTP(0xc0000941a0, 0x9097c0, 0xc0000ac1c0, 0xc0000da400)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.AppCtxMiddleware.func1.1(0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:66 +0x77
+net/http.HandlerFunc.ServeHTTP(0xc00009a2d0, 0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).ServeHTTP(0xc0000a60c0, 0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:70 +0x513
+github.com/go-chi/chi.(*Mux).Mount.func1(0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:298 +0x118
+net/http.HandlerFunc.ServeHTTP(0xc0000943e0, 0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).routeHTTP(0xc0000a6060, 0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:431 +0x278
+net/http.HandlerFunc.ServeHTTP(0xc00009c0c0, 0x9097c0, 0xc0000ac1c0, 0xc0000da300)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).ServeHTTP(0xc0000a6060, 0x9097c0, 0xc0000ac1c0, 0xc0000da200)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:86 +0x2b2
+net/http.serverHandler.ServeHTTP(0xc0000ac000, 0x9097c0, 0xc0000ac1c0, 0xc0000da200)
+	/usr/local/go/src/net/http/server.go:2836 +0xa3
+net/http.(*conn).serve(0xc0000a9540, 0x90a800, 0xc0000a1e80)
+	/usr/local/go/src/net/http/server.go:1924 +0x86c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:2962 +0x35c
+2022-03-23T03:25:54.456Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"socket hang up","code":"ECONNRESET","stack":["Error: socket hang up","    at connResetException (internal/errors.js:639:14)","    at Socket.socketOnEnd (_http_client.js:499:23)","    at Socket.emit (events.js:412:35)","    at endReadableNT (internal/streams/readable.js:1334:12)","    at processTicksAndRejections (internal/process/task_queues.js:82:21)"]}
+time="2022-03-23T03:25:54.46" level=error msg="Init failed" InvokeID= error="Runtime exited with error: exit status 129"
+time="2022-03-23T03:25:54.46" level=error msg="INIT DONE failed: Runtime.ExitError"
+START RequestId: f8a1ab19-3260-4123-a626-deeac550fb0c Version: $LATEST
+2022-03-23T03:27:57.645Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Runtime.HandlerNotFound","errorMessage":"index.handler is undefined or not exported","stack":["Runtime.HandlerNotFound: index.handler is undefined or not exported","    at Object.module.exports.load (/var/runtime/UserFunction.js:246:11)","    at Object.<anonymous> (/var/runtime/index.js:43:30)","    at Module._compile (internal/modules/cjs/loader.js:1085:14)","    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)","    at Module.load (internal/modules/cjs/loader.js:950:32)","    at Function.Module._load (internal/modules/cjs/loader.js:790:12)","    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)","    at internal/main/run_main_module.js:17:47"]}
+2022-03-23T03:27:57.650Z	undefined	ERROR	(node:14) Warning: Accessing non-existent property 'handler' of module exports inside circular dependency(Use `node --trace-warnings ...` to show where the warning was created)
