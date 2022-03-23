@@ -1,48 +1,41 @@
-import { getDB,  executeTransactWrite,getClient, queryDB } from "../helpers/dynamoHelper";
-import { IParams, IResponse } from "../interfaces/IParams";
-import { userlessons } from "./lessons";
+import { IUser } from "../interfaces/IUser";
+import { getResponseValue } from "../helpers/utilsHelper";
 
-const TABLE_NAME = process.env.TABLE_NAME || "";
 
-export const userInfo = async (username:string): Promise<any> => {
-  const PK: string = "USER";
-  const SK: string = "USER#" + username;
-  const params = {
-      Key: {
-          PK,
-          SK
-      },
-      TableName: TABLE_NAME
-  };
-  try {
-      return await getDB(params, "The user not exist");
-    } catch (error) {
-        console.log(error)
-        throw error
+export class User implements IUser {
+    name: string;
+    email: string;
+    address: string;
+    password: string;
+
+    constructor(props: IUser) {
+        this.name = props.name;
+        this.email = props.email;
+        this.address = props.address;
+        this.password = props.password;
     }
+
+    create = async (): Promise<any> => {
+        try {
+   
+        } catch (error) {
+            return { error: error }
+        }
+    }
+    edit = async (id: string): Promise<any> => {
+        try {
+                
+        } catch (error) {
+            return { error: error }
+        }
+    }
+    static getUser = async (id: string): Promise<any> => {
+        try {
+
+        } catch (error) {
+            return { error: error }
+        }
+    }
+
 }
-
-export const allUsers = async (): Promise<any> => {
-    let users: IResponse = {Items: []};
-
-    const params: IParams = {
-        TableName: TABLE_NAME,
-        KeyConditionExpression: "#PK = :pk ",
-        ExpressionAttributeValues: {
-            ":pk": "USER"
-        },
-        ExpressionAttributeNames: {
-            "#PK": "PK"
-        },
-    }
-
-    try {
-        users = await queryDB(params, "Not friendships yet");
-        return users;
-
-      } catch (error) {
-          console.log(error)
-          throw error
-      }
-  }
 

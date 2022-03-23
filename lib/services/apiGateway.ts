@@ -19,15 +19,21 @@ export const getApiGatewayResources = (scope: cdk.Construct, env: any, opt?: any
 
 
     const versionRoute = restApi.root.addResource(`v${env.PROJECT_VERSION}`);
-    const lessonsRoute = versionRoute.addResource('lesson');
-    const userRoute = versionRoute.addResource('user');
-    const friendsRoute = versionRoute.addResource('friends');
+    const signupRoute = versionRoute.addResource('signup');
+    const signinRoute = versionRoute.addResource('signin');
+    const logoutRoute = versionRoute.addResource('logout');
+    const searchesRoute = versionRoute.addResource('searches');
+    const searchRoute = versionRoute.addResource('search');
+    const searchDetailRoute = searchRoute.addResource('{searchId}');
 
     return {
         restApi,
         versionRoute,
-        lessonsRoute,
-        userRoute,
-        friendsRoute
+        signupRoute,
+        signinRoute,
+        logoutRoute,
+        searchesRoute,
+        searchRoute,
+        searchDetailRoute
     }
 }

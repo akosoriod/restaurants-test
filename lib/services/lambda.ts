@@ -1,11 +1,11 @@
+import * as path from "path";
 import * as cdk from "@aws-cdk/core";
+import * as lambda from "@aws-cdk/aws-lambda";
+import * as apiGateway from "@aws-cdk/aws-apigateway";
+import {Resource} from "@aws-cdk/aws-apigateway/lib/resource";
 import {NodejsFunction} from "@aws-cdk/aws-lambda-nodejs";
 import {Construct} from "@aws-cdk/core";
 import {NodejsFunctionProps} from "@aws-cdk/aws-lambda-nodejs/lib/function";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as path from "path";
-import {Resource} from "@aws-cdk/aws-apigateway/lib/resource";
-import * as apiGateway from "@aws-cdk/aws-apigateway";
 
 const handlersDirectoryPath = path.join(__dirname, `./../../src/handlers/`)
 
@@ -107,92 +107,119 @@ export const getLambdas = (
     env: any,
     opt: any
 ): { [key: string]: NodejsFunction } => {
+    const signup = () => getNodeLambdaFunction(
+        stack,
+        "signup",
+        "auth/signup.ts",
+        env,
+        {
+            environment: {
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
+            }
+        },
+        {baseRoute: opt.routes.signupRoute, path: '', method: "POST"}
+    );
 
-    const user = () => getNodeLambdaFunction(
+    const signin = () => getNodeLambdaFunction(
         stack,
-        "user",
-        "user/user.ts",
+        "signin",
+        "auth/signin.ts",
         env,
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
             }
         },
-        {baseRoute: opt.routes.userRoute, path: '{username}', method: "GET"}
-    )
-    const allUsers = () => getNodeLambdaFunction(
-        stack,
-        "allUsers",
-        "user/users.ts",
-        env,
-        {
-            environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-            }
-        },
-        {baseRoute: opt.routes.userRoute, path: 'all', method: "GET"}
-    )
+        {baseRoute: opt.routes.signinRoute, path: '', method: "POST"}
+    );
 
-    const friends = () => getNodeLambdaFunction(
+    const logout = () => getNodeLambdaFunction(
         stack,
-        "friends",
-        "friends/friends.ts",
+        "logout",
+        "auth/logout.ts",
         env,
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
             }
         },
-        {baseRoute: opt.routes.friendsRoute, path: 'all', method: "GET"}
-    )
+        {baseRoute: opt.routes.logoutRoute, path: '', method: "POST"}
+    );
 
-    const userFriends = () => getNodeLambdaFunction(
+// search
+    const searches = () => getNodeLambdaFunction(
         stack,
-        "userFriends",
-        "friends/userFriends.ts",
+        "searches",
+        "search/searches.ts",
         env,
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
             }
         },
-        {baseRoute: opt.routes.friendsRoute, path: '{username}', method: "GET"}
-    )
-    
-    const lessons = () => getNodeLambdaFunction(
-        stack,
-        "lessons",
-        "lessons/lessons.ts",
-        env,
-        {
-            environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-            }
-        },
-        {baseRoute: opt.routes.lessonsRoute, path: 'all', method: "GET"}
-    )
+        {baseRoute: opt.routes.searchesRoute, path: '', method: "GET"}
+    );
 
-
-    const userLessons = () => getNodeLambdaFunction(
+    const createSearch = () => getNodeLambdaFunction(
         stack,
-        "userLessons",
-        "lessons/userLessons.ts",
+        "createSearch",
+        "search/createSearch.ts",
         env,
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
             }
         },
-        {baseRoute: opt.routes.lessonsRoute, path: '{username}', method: "GET"}
-    )
- 
+        {baseRoute: opt.routes.searchRoute, path: 'new', method: "POST"}
+    );
+
+    const getSearch = () => getNodeLambdaFunction(
+        stack,
+        "getSearch",
+        "search/getSearch.ts",
+        env,
+        {
+            environment: {
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
+            }
+        },
+        {baseRoute: opt.routes.searchDetailRoute, path: '', method: "GET"}
+    );
+
+    const deleteSearch = () => getNodeLambdaFunction(
+        stack,
+        "deleteSearch",
+        "search/deleteSearch.ts",
+        env,
+        {
+            environment: {
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                TOKEN_SECRET: env.TOKEN_SECRET,
+                API_KEY_MAPS: env.API_KEY_MAPS
+            }
+        },
+        {baseRoute: opt.routes.searchDetailRoute, path: '', method: "DELETE"}
+    );
     const allLambdas: { [key: string]: () => NodejsFunction } = {
-        allUsers,
-        friends,
-        user,
-        userFriends,
-        lessons,
-        userLessons
+        signup,
+        signin,
+        logout,
+        searches,
+        createSearch,
+        getSearch,
+        deleteSearch
     }
 
     return getFunctionsForSynth(allLambdas, opt.onlySynth || []);

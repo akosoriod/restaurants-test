@@ -1,8 +1,8 @@
 {
-  "name": "modak",
+  "name": "tyba",
   "version": "0.1.0",
   "bin": {
-    "modak": "bin/modak.js"
+    "tyba": "bin/tyba.js"
   },
   "scripts": {
     "build": "tsc",
@@ -28,10 +28,10 @@
     "@aws-cdk/aws-lambda-nodejs": "^1.145.0",
     "@aws-cdk/core": "^1.145.0",
     "@aws-cdk/pipelines": "^1.145.0",
-    "aws-cdk-dynamodb-seeder": "^1.56.1",
     "aws-cdk-lib": "2.8.0",
     "aws-lambda": "^1.0.7",
     "constructs": "^10.0.0",
+    "node-fetch": "^3.2.3",
     "source-map-support": "^0.5.16"
   }
 }

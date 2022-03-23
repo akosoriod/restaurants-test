@@ -3,18 +3,22 @@ import {getLambdas} from "./services/lambda";
 import {getIAMPolicy} from "./services/iam";
 import {getApiGatewayResources} from "./services/apiGateway";
 
-export class modakInfrastructureStack extends cdk.Stack {
+export class TybaInfrastructureStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, env: any, props?: cdk.StackProps) {
 
         super(scope, id, props);
+
 
         // API GATEWAY
 
         const {
             versionRoute,
-            lessonsRoute,
-            userRoute,
-            friendsRoute
+            signupRoute,
+            signinRoute,
+            logoutRoute,
+            searchesRoute,
+            searchRoute,
+            searchDetailRoute
         } = getApiGatewayResources(this, env);
 
         // LAMBDAS
@@ -26,19 +30,17 @@ export class modakInfrastructureStack extends cdk.Stack {
                 onlySynth: [],
                 routes: {
                     versionRoute,
-                    lessonsRoute,
-                    userRoute,
-                    friendsRoute
+                    signupRoute,
+                    signinRoute,
+                    logoutRoute,
+                    searchesRoute,
+                    searchRoute,
+                    searchDetailRoute
                 }
             });
 
         const {
-            allUsers,
-            friends,
-            user,
-            userFriends,
-            lessons,
-            userLessons,
+            signup
         } = lambdas;
 
         Object.keys(lambdas).forEach((lambdaFunctionKey: string) => {

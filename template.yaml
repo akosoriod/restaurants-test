@@ -1,11 +1,11 @@
 Resources:
-  modakV1Apidevelopment96DA8F45:
+  tybaV1Apidevelopment8EE8FE0F:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: modak-V1-Api-development
+      Name: tyba-V1-Api-development
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Resource
-  modakV1ApidevelopmentCloudWatchRoleF02FD3FC:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Resource
+  tybaV1ApidevelopmentCloudWatchRole6D651E47:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -22,61 +22,73 @@ Resources:
               - Ref: AWS::Partition
               - :iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/CloudWatchRole/Resource
-  modakV1ApidevelopmentAccount51253183:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/CloudWatchRole/Resource
+  tybaV1ApidevelopmentAccount9F2CB9AF:
     Type: AWS::ApiGateway::Account
     Properties:
       CloudWatchRoleArn:
         Fn::GetAtt:
-          - modakV1ApidevelopmentCloudWatchRoleF02FD3FC
+          - tybaV1ApidevelopmentCloudWatchRole6D651E47
           - Arn
     DependsOn:
-      - modakV1Apidevelopment96DA8F45
+      - tybaV1Apidevelopment8EE8FE0F
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Account
-  modakV1ApidevelopmentDeployment908D1CA0c7a1c26cc4cc7d0e76d734fc390e592c:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Account
+  tybaV1ApidevelopmentDeployment453106051373c186fcc26c89903c5fec5e7ff46d:
     Type: AWS::ApiGateway::Deployment
     Properties:
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       Description: Automatically created by the RestApi construct
     DependsOn:
-      - modakV1ApidevelopmentOPTIONSC0D141A6
-      - modakV1Apidevelopmentv1friendsOPTIONS417F2987
-      - modakV1Apidevelopmentv1friends72BA6DFD
-      - modakV1Apidevelopmentv1lessonOPTIONS93A03162
-      - modakV1Apidevelopmentv1lesson6FB42B99
-      - modakV1Apidevelopmentv1OPTIONS0EA315CD
-      - modakV1Apidevelopmentv18E6B475C
-      - modakV1Apidevelopmentv1userallGET21B1E783
-      - modakV1Apidevelopmentv1userallOPTIONS050C5FBA
-      - modakV1Apidevelopmentv1userall4967238E
-      - modakV1Apidevelopmentv1userOPTIONS66D3DB68
-      - modakV1Apidevelopmentv1user6472DB54
+      - tybaV1ApidevelopmentOPTIONS94A55A0F
+      - tybaV1Apidevelopmentv1logoutOPTIONS978EF103
+      - tybaV1Apidevelopmentv1logoutPOST8ACF16E9
+      - tybaV1Apidevelopmentv1logout2563CFB3
+      - tybaV1Apidevelopmentv1OPTIONS2E35C39A
+      - tybaV1Apidevelopmentv155DAE433
+      - tybaV1Apidevelopmentv1searchsearchIdDELETEE3536397
+      - tybaV1Apidevelopmentv1searchsearchIdGET321328D1
+      - tybaV1Apidevelopmentv1searchsearchIdOPTIONS23C5B650
+      - tybaV1Apidevelopmentv1searchsearchId9F24487A
+      - tybaV1Apidevelopmentv1searchnewOPTIONS593AC819
+      - tybaV1Apidevelopmentv1searchnewPOSTD7EDC8C6
+      - tybaV1Apidevelopmentv1searchnewABDE865C
+      - tybaV1Apidevelopmentv1searchOPTIONS45602530
+      - tybaV1Apidevelopmentv1searchC3283AEE
+      - tybaV1Apidevelopmentv1searchesGETBE81D156
+      - tybaV1Apidevelopmentv1searchesOPTIONS99D22572
+      - tybaV1Apidevelopmentv1searches828130F4
+      - tybaV1Apidevelopmentv1signinOPTIONS779C3E06
+      - tybaV1Apidevelopmentv1signinPOST17A46FBE
+      - tybaV1Apidevelopmentv1signinF8923D4C
+      - tybaV1Apidevelopmentv1signupOPTIONS344B6ADD
+      - tybaV1Apidevelopmentv1signupPOST4E54A0BB
+      - tybaV1Apidevelopmentv1signupE1B22A7B
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Deployment/Resource
-  modakV1ApidevelopmentDeploymentStagedevelopment4BA90F53:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Deployment/Resource
+  tybaV1ApidevelopmentDeploymentStageprodCADD5336:
     Type: AWS::ApiGateway::Stage
     Properties:
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       DeploymentId:
-        Ref: modakV1ApidevelopmentDeployment908D1CA0c7a1c26cc4cc7d0e76d734fc390e592c
-      StageName: development
+        Ref: tybaV1ApidevelopmentDeployment453106051373c186fcc26c89903c5fec5e7ff46d
+      StageName: prod
     DependsOn:
-      - modakV1ApidevelopmentAccount51253183
+      - tybaV1ApidevelopmentAccount9F2CB9AF
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/DeploymentStage.development/Resource
-  modakV1ApidevelopmentOPTIONSC0D141A6:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/DeploymentStage.prod/Resource
+  tybaV1ApidevelopmentOPTIONS94A55A0F:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: OPTIONS
       ResourceId:
         Fn::GetAtt:
-          - modakV1Apidevelopment96DA8F45
+          - tybaV1Apidevelopment8EE8FE0F
           - RootResourceId
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       AuthorizationType: NONE
       Integration:
         IntegrationResponses:
@@ -97,27 +109,27 @@ Resources:
             method.response.header.Access-Control-Allow-Credentials: true
           StatusCode: "204"
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/OPTIONS/Resource
-  modakV1Apidevelopmentv18E6B475C:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/OPTIONS/Resource
+  tybaV1Apidevelopmentv155DAE433:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId:
         Fn::GetAtt:
-          - modakV1Apidevelopment96DA8F45
+          - tybaV1Apidevelopment8EE8FE0F
           - RootResourceId
       PathPart: v1
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/Resource
-  modakV1Apidevelopmentv1OPTIONS0EA315CD:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/Resource
+  tybaV1Apidevelopmentv1OPTIONS2E35C39A:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: OPTIONS
       ResourceId:
-        Ref: modakV1Apidevelopmentv18E6B475C
+        Ref: tybaV1Apidevelopmentv155DAE433
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       AuthorizationType: NONE
       Integration:
         IntegrationResponses:
@@ -138,25 +150,25 @@ Resources:
             method.response.header.Access-Control-Allow-Credentials: true
           StatusCode: "204"
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/OPTIONS/Resource
-  modakV1Apidevelopmentv1lesson6FB42B99:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/OPTIONS/Resource
+  tybaV1Apidevelopmentv1signupE1B22A7B:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId:
-        Ref: modakV1Apidevelopmentv18E6B475C
-      PathPart: lesson
+        Ref: tybaV1Apidevelopmentv155DAE433
+      PathPart: signup
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/lesson/Resource
-  modakV1Apidevelopmentv1lessonOPTIONS93A03162:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signup/Resource
+  tybaV1Apidevelopmentv1signupOPTIONS344B6ADD:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: OPTIONS
       ResourceId:
-        Ref: modakV1Apidevelopmentv1lesson6FB42B99
+        Ref: tybaV1Apidevelopmentv1signupE1B22A7B
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       AuthorizationType: NONE
       Integration:
         IntegrationResponses:
@@ -177,92 +189,14 @@ Resources:
             method.response.header.Access-Control-Allow-Credentials: true
           StatusCode: "204"
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/lesson/OPTIONS/Resource
-  modakV1Apidevelopmentv1user6472DB54:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId:
-        Ref: modakV1Apidevelopmentv18E6B475C
-      PathPart: user
-      RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
-    Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/Resource
-  modakV1Apidevelopmentv1userOPTIONS66D3DB68:
-    Type: AWS::ApiGateway::Method
-    Properties:
-      HttpMethod: OPTIONS
-      ResourceId:
-        Ref: modakV1Apidevelopmentv1user6472DB54
-      RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
-      AuthorizationType: NONE
-      Integration:
-        IntegrationResponses:
-          - ResponseParameters:
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
-              method.response.header.Access-Control-Allow-Credentials: "'true'"
-            StatusCode: "204"
-        RequestTemplates:
-          application/json: "{ statusCode: 200 }"
-        Type: MOCK
-      MethodResponses:
-        - ResponseParameters:
-            method.response.header.Access-Control-Allow-Headers: true
-            method.response.header.Access-Control-Allow-Origin: true
-            method.response.header.Access-Control-Allow-Methods: true
-            method.response.header.Access-Control-Allow-Credentials: true
-          StatusCode: "204"
-    Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/OPTIONS/Resource
-  modakV1Apidevelopmentv1userall4967238E:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId:
-        Ref: modakV1Apidevelopmentv1user6472DB54
-      PathPart: all
-      RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
-    Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/all/Resource
-  modakV1Apidevelopmentv1userallOPTIONS050C5FBA:
-    Type: AWS::ApiGateway::Method
-    Properties:
-      HttpMethod: OPTIONS
-      ResourceId:
-        Ref: modakV1Apidevelopmentv1userall4967238E
-      RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
-      AuthorizationType: NONE
-      Integration:
-        IntegrationResponses:
-          - ResponseParameters:
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
-              method.response.header.Access-Control-Allow-Credentials: "'true'"
-            StatusCode: "204"
-        RequestTemplates:
-          application/json: "{ statusCode: 200 }"
-        Type: MOCK
-      MethodResponses:
-        - ResponseParameters:
-            method.response.header.Access-Control-Allow-Headers: true
-            method.response.header.Access-Control-Allow-Origin: true
-            method.response.header.Access-Control-Allow-Methods: true
-            method.response.header.Access-Control-Allow-Credentials: true
-          StatusCode: "204"
-    Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/all/OPTIONS/Resource
-  modakV1Apidevelopmentv1userallGETApiPermissionmodakV1InfrastructureStackdevelopmentmodakV1Apidevelopment04FB1B78GETv1userall985F0E4A:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signup/OPTIONS/Resource
+  tybaV1Apidevelopmentv1signupPOSTApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1signupC0FD3368:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
       FunctionName:
         Fn::GetAtt:
-          - allUsersC12A8EC1
+          - signup3542BA4E
           - Arn
       Principal: apigateway.amazonaws.com
       SourceArn:
@@ -271,19 +205,19 @@ Resources:
           - - "arn:"
             - Ref: AWS::Partition
             - ":execute-api:us-east-1:322889881075:"
-            - Ref: modakV1Apidevelopment96DA8F45
+            - Ref: tybaV1Apidevelopment8EE8FE0F
             - /
-            - Ref: modakV1ApidevelopmentDeploymentStagedevelopment4BA90F53
-            - /GET/v1/user/all
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /POST/v1/signup
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/all/GET/ApiPermission.modakV1InfrastructureStackdevelopmentmodakV1Apidevelopment04FB1B78.GET..v1.user.all
-  modakV1Apidevelopmentv1userallGETApiPermissionTestmodakV1InfrastructureStackdevelopmentmodakV1Apidevelopment04FB1B78GETv1userallEB67E304:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signup/POST/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.signup
+  tybaV1Apidevelopmentv1signupPOSTApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1signup85D7C6E4:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
       FunctionName:
         Fn::GetAtt:
-          - allUsersC12A8EC1
+          - signup3542BA4E
           - Arn
       Principal: apigateway.amazonaws.com
       SourceArn:
@@ -292,18 +226,18 @@ Resources:
           - - "arn:"
             - Ref: AWS::Partition
             - ":execute-api:us-east-1:322889881075:"
-            - Ref: modakV1Apidevelopment96DA8F45
-            - /test-invoke-stage/GET/v1/user/all
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/POST/v1/signup
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/all/GET/ApiPermission.Test.modakV1InfrastructureStackdevelopmentmodakV1Apidevelopment04FB1B78.GET..v1.user.all
-  modakV1Apidevelopmentv1userallGET21B1E783:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signup/POST/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.signup
+  tybaV1Apidevelopmentv1signupPOST4E54A0BB:
     Type: AWS::ApiGateway::Method
     Properties:
-      HttpMethod: GET
+      HttpMethod: POST
       ResourceId:
-        Ref: modakV1Apidevelopmentv1userall4967238E
+        Ref: tybaV1Apidevelopmentv1signupE1B22A7B
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       AuthorizationType: NONE
       Integration:
         IntegrationHttpMethod: POST
@@ -315,29 +249,29 @@ Resources:
               - Ref: AWS::Partition
               - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
               - Fn::GetAtt:
-                  - allUsersC12A8EC1
+                  - signup3542BA4E
                   - Arn
               - /invocations
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/user/all/GET/Resource
-  modakV1Apidevelopmentv1friends72BA6DFD:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signup/POST/Resource
+  tybaV1Apidevelopmentv1signinF8923D4C:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId:
-        Ref: modakV1Apidevelopmentv18E6B475C
-      PathPart: friends
+        Ref: tybaV1Apidevelopmentv155DAE433
+      PathPart: signin
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/friends/Resource
-  modakV1Apidevelopmentv1friendsOPTIONS417F2987:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signin/Resource
+  tybaV1Apidevelopmentv1signinOPTIONS779C3E06:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: OPTIONS
       ResourceId:
-        Ref: modakV1Apidevelopmentv1friends72BA6DFD
+        Ref: tybaV1Apidevelopmentv1signinF8923D4C
       RestApiId:
-        Ref: modakV1Apidevelopment96DA8F45
+        Ref: tybaV1Apidevelopment8EE8FE0F
       AuthorizationType: NONE
       Integration:
         IntegrationResponses:
@@ -358,8 +292,587 @@ Resources:
             method.response.header.Access-Control-Allow-Credentials: true
           StatusCode: "204"
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/modak-V1-Api-development/Default/v1/friends/OPTIONS/Resource
-  allUsersServiceRoleE93C3899:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signin/OPTIONS/Resource
+  tybaV1Apidevelopmentv1signinPOSTApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1signin868727FF:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - signin760D28B9
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /POST/v1/signin
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signin/POST/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.signin
+  tybaV1Apidevelopmentv1signinPOSTApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1signin6FA442E1:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - signin760D28B9
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/POST/v1/signin
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signin/POST/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.signin
+  tybaV1Apidevelopmentv1signinPOST17A46FBE:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1signinF8923D4C
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - signin760D28B9
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/signin/POST/Resource
+  tybaV1Apidevelopmentv1logout2563CFB3:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: tybaV1Apidevelopmentv155DAE433
+      PathPart: logout
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/logout/Resource
+  tybaV1Apidevelopmentv1logoutOPTIONS978EF103:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1logout2563CFB3
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
+            StatusCode: "204"
+        RequestTemplates:
+          application/json: "{ statusCode: 200 }"
+        Type: MOCK
+      MethodResponses:
+        - ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "204"
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/logout/OPTIONS/Resource
+  tybaV1Apidevelopmentv1logoutPOSTApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1logoutE5636D19:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - logout17F79345
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /POST/v1/logout
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/logout/POST/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.logout
+  tybaV1Apidevelopmentv1logoutPOSTApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1logout0F869F34:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - logout17F79345
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/POST/v1/logout
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/logout/POST/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.logout
+  tybaV1Apidevelopmentv1logoutPOST8ACF16E9:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1logout2563CFB3
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - logout17F79345
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/logout/POST/Resource
+  tybaV1Apidevelopmentv1searches828130F4:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: tybaV1Apidevelopmentv155DAE433
+      PathPart: searches
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/searches/Resource
+  tybaV1Apidevelopmentv1searchesOPTIONS99D22572:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searches828130F4
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
+            StatusCode: "204"
+        RequestTemplates:
+          application/json: "{ statusCode: 200 }"
+        Type: MOCK
+      MethodResponses:
+        - ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "204"
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/searches/OPTIONS/Resource
+  tybaV1Apidevelopmentv1searchesGETApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2GETv1searchesB370F3B8:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - searches1E9308C2
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /GET/v1/searches
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/searches/GET/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.GET..v1.searches
+  tybaV1Apidevelopmentv1searchesGETApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2GETv1searches7DDF7642:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - searches1E9308C2
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/GET/v1/searches
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/searches/GET/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.GET..v1.searches
+  tybaV1Apidevelopmentv1searchesGETBE81D156:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searches828130F4
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - searches1E9308C2
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/searches/GET/Resource
+  tybaV1Apidevelopmentv1searchC3283AEE:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: tybaV1Apidevelopmentv155DAE433
+      PathPart: search
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/Resource
+  tybaV1Apidevelopmentv1searchOPTIONS45602530:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchC3283AEE
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
+            StatusCode: "204"
+        RequestTemplates:
+          application/json: "{ statusCode: 200 }"
+        Type: MOCK
+      MethodResponses:
+        - ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "204"
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/OPTIONS/Resource
+  tybaV1Apidevelopmentv1searchsearchId9F24487A:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: tybaV1Apidevelopmentv1searchC3283AEE
+      PathPart: "{searchId}"
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/Resource
+  tybaV1Apidevelopmentv1searchsearchIdOPTIONS23C5B650:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchsearchId9F24487A
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
+            StatusCode: "204"
+        RequestTemplates:
+          application/json: "{ statusCode: 200 }"
+        Type: MOCK
+      MethodResponses:
+        - ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "204"
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/OPTIONS/Resource
+  tybaV1Apidevelopmentv1searchsearchIdGETApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2GETv1searchsearchIdD3768EBC:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - getSearch8B5F650F
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /GET/v1/search/*
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/GET/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.GET..v1.search.{searchId}
+  tybaV1Apidevelopmentv1searchsearchIdGETApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2GETv1searchsearchId26038D71:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - getSearch8B5F650F
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/GET/v1/search/*
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/GET/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.GET..v1.search.{searchId}
+  tybaV1Apidevelopmentv1searchsearchIdGET321328D1:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchsearchId9F24487A
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - getSearch8B5F650F
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/GET/Resource
+  tybaV1Apidevelopmentv1searchsearchIdDELETEApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2DELETEv1searchsearchIdB7386A21:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - deleteSearchC30909B2
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /DELETE/v1/search/*
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/DELETE/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.DELETE..v1.search.{searchId}
+  tybaV1Apidevelopmentv1searchsearchIdDELETEApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2DELETEv1searchsearchIdA9DDFAFC:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - deleteSearchC30909B2
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/DELETE/v1/search/*
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/DELETE/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.DELETE..v1.search.{searchId}
+  tybaV1Apidevelopmentv1searchsearchIdDELETEE3536397:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: DELETE
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchsearchId9F24487A
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - deleteSearchC30909B2
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/{searchId}/DELETE/Resource
+  tybaV1Apidevelopmentv1searchnewABDE865C:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: tybaV1Apidevelopmentv1searchC3283AEE
+      PathPart: new
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/new/Resource
+  tybaV1Apidevelopmentv1searchnewOPTIONS593AC819:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchnewABDE865C
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
+            StatusCode: "204"
+        RequestTemplates:
+          application/json: "{ statusCode: 200 }"
+        Type: MOCK
+      MethodResponses:
+        - ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "204"
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/new/OPTIONS/Resource
+  tybaV1Apidevelopmentv1searchnewPOSTApiPermissiontybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1searchnewF3B66BC3:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - createSearch08DDAFDF
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /
+            - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
+            - /POST/v1/search/new
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/new/POST/ApiPermission.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.search.new
+  tybaV1Apidevelopmentv1searchnewPOSTApiPermissionTesttybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2POSTv1searchnewFF3D1967:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - createSearch08DDAFDF
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:322889881075:"
+            - Ref: tybaV1Apidevelopment8EE8FE0F
+            - /test-invoke-stage/POST/v1/search/new
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/new/POST/ApiPermission.Test.tybaV1InfrastructureStackdevelopmenttybaV1Apidevelopment75D105D2.POST..v1.search.new
+  tybaV1Apidevelopmentv1searchnewPOSTD7EDC8C6:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: tybaV1Apidevelopmentv1searchnewABDE865C
+      RestApiId:
+        Ref: tybaV1Apidevelopment8EE8FE0F
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - createSearch08DDAFDF
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/tyba-V1-Api-development/Default/v1/search/new/POST/Resource
+  signupServiceRole22DA917C:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -376,8 +889,8 @@ Resources:
               - Ref: AWS::Partition
               - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/allUsers/ServiceRole/Resource
-  allUsersServiceRoleDefaultPolicy08AB9974:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signup/ServiceRole/Resource
+  signupServiceRoleDefaultPolicyD5692CF8:
     Type: AWS::IAM::Policy
     Properties:
       PolicyDocument:
@@ -386,36 +899,397 @@ Resources:
             Effect: Allow
             Resource: "*"
         Version: "2012-10-17"
-      PolicyName: allUsersServiceRoleDefaultPolicy08AB9974
+      PolicyName: signupServiceRoleDefaultPolicyD5692CF8
       Roles:
-        - Ref: allUsersServiceRoleE93C3899
+        - Ref: signupServiceRole22DA917C
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/allUsers/ServiceRole/DefaultPolicy/Resource
-  allUsersC12A8EC1:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signup/ServiceRole/DefaultPolicy/Resource
+  signup3542BA4E:
     Type: AWS::Lambda::Function
     Properties:
       Code:
         S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
-        S3Key: 95fe5b9dc2c22d3b5af28068f32b412a110061bdd14fa1ed2428137f37b7ad16.zip
+        S3Key: c667ceb2c23b848ef6c0ddc1439d32fe63691401df4098fb6a72aab53442469e.zip
       Role:
         Fn::GetAtt:
-          - allUsersServiceRoleE93C3899
+          - signupServiceRole22DA917C
           - Arn
       Environment:
         Variables:
-          TABLE_NAME: modak-V1-MainTable-development
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
           AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
-      FunctionName: modak-V1-allUsers-development
+      FunctionName: tyba-V1-signup-development
       Handler: index.handler
       MemorySize: 128
       Runtime: nodejs14.x
       Timeout: 15
     DependsOn:
-      - allUsersServiceRoleDefaultPolicy08AB9974
-      - allUsersServiceRoleE93C3899
+      - signupServiceRoleDefaultPolicyD5692CF8
+      - signupServiceRole22DA917C
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/allUsers/Resource
-      aws:asset:path: E:\akosoriod\Documents\Serverless\modak\modak-back\cdk.out\asset.95fe5b9dc2c22d3b5af28068f32b412a110061bdd14fa1ed2428137f37b7ad16
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signup/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.c667ceb2c23b848ef6c0ddc1439d32fe63691401df4098fb6a72aab53442469e
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  signinServiceRoleD7EE3EEC:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signin/ServiceRole/Resource
+  signinServiceRoleDefaultPolicy8FF5A9E6:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: signinServiceRoleDefaultPolicy8FF5A9E6
+      Roles:
+        - Ref: signinServiceRoleD7EE3EEC
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signin/ServiceRole/DefaultPolicy/Resource
+  signin760D28B9:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: 52526722bb60f2b4843b8ad14208191cb530f3e0fe40b93499e2d07a447f1a30.zip
+      Role:
+        Fn::GetAtt:
+          - signinServiceRoleD7EE3EEC
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-signin-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - signinServiceRoleDefaultPolicy8FF5A9E6
+      - signinServiceRoleD7EE3EEC
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/signin/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.52526722bb60f2b4843b8ad14208191cb530f3e0fe40b93499e2d07a447f1a30
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  logoutServiceRole02FF2FFC:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/logout/ServiceRole/Resource
+  logoutServiceRoleDefaultPolicy7238B69C:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: logoutServiceRoleDefaultPolicy7238B69C
+      Roles:
+        - Ref: logoutServiceRole02FF2FFC
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/logout/ServiceRole/DefaultPolicy/Resource
+  logout17F79345:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: 52526722bb60f2b4843b8ad14208191cb530f3e0fe40b93499e2d07a447f1a30.zip
+      Role:
+        Fn::GetAtt:
+          - logoutServiceRole02FF2FFC
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-logout-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - logoutServiceRoleDefaultPolicy7238B69C
+      - logoutServiceRole02FF2FFC
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/logout/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.52526722bb60f2b4843b8ad14208191cb530f3e0fe40b93499e2d07a447f1a30
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  searchesServiceRole3EB4F5A8:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/searches/ServiceRole/Resource
+  searchesServiceRoleDefaultPolicyF208CA80:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: searchesServiceRoleDefaultPolicyF208CA80
+      Roles:
+        - Ref: searchesServiceRole3EB4F5A8
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/searches/ServiceRole/DefaultPolicy/Resource
+  searches1E9308C2:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: cc68eff61ad733f13311dadad8242c8e55ba7c9d68b4f3446190ad8b2f645d66.zip
+      Role:
+        Fn::GetAtt:
+          - searchesServiceRole3EB4F5A8
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-searches-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - searchesServiceRoleDefaultPolicyF208CA80
+      - searchesServiceRole3EB4F5A8
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/searches/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.cc68eff61ad733f13311dadad8242c8e55ba7c9d68b4f3446190ad8b2f645d66
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  createSearchServiceRole60EBD49B:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/createSearch/ServiceRole/Resource
+  createSearchServiceRoleDefaultPolicy48F19F09:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: createSearchServiceRoleDefaultPolicy48F19F09
+      Roles:
+        - Ref: createSearchServiceRole60EBD49B
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/createSearch/ServiceRole/DefaultPolicy/Resource
+  createSearch08DDAFDF:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: 6a1066174cca23f34992f05a2a58352308c8f250dac99c50bbf54c2ebd4a1220.zip
+      Role:
+        Fn::GetAtt:
+          - createSearchServiceRole60EBD49B
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-createSearch-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - createSearchServiceRoleDefaultPolicy48F19F09
+      - createSearchServiceRole60EBD49B
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/createSearch/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.6a1066174cca23f34992f05a2a58352308c8f250dac99c50bbf54c2ebd4a1220
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  getSearchServiceRole17E5AC47:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/getSearch/ServiceRole/Resource
+  getSearchServiceRoleDefaultPolicyFAAC6AD0:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: getSearchServiceRoleDefaultPolicyFAAC6AD0
+      Roles:
+        - Ref: getSearchServiceRole17E5AC47
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/getSearch/ServiceRole/DefaultPolicy/Resource
+  getSearch8B5F650F:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: 2b30e85ca6b6757f5aebc47634ee0c320960cb420e90b7b19880c2b735916176.zip
+      Role:
+        Fn::GetAtt:
+          - getSearchServiceRole17E5AC47
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-getSearch-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - getSearchServiceRoleDefaultPolicyFAAC6AD0
+      - getSearchServiceRole17E5AC47
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/getSearch/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.2b30e85ca6b6757f5aebc47634ee0c320960cb420e90b7b19880c2b735916176
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  deleteSearchServiceRole4A2CF168:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/deleteSearch/ServiceRole/Resource
+  deleteSearchServiceRoleDefaultPolicy2AFA8E0D:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: "*"
+        Version: "2012-10-17"
+      PolicyName: deleteSearchServiceRoleDefaultPolicy2AFA8E0D
+      Roles:
+        - Ref: deleteSearchServiceRole4A2CF168
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/deleteSearch/ServiceRole/DefaultPolicy/Resource
+  deleteSearchC30909B2:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-322889881075-us-east-1
+        S3Key: b3ab49247d9c7375cdfb0aadffa5b0d5d836e0e536480a3cfafdd9054a3ba8ba.zip
+      Role:
+        Fn::GetAtt:
+          - deleteSearchServiceRole4A2CF168
+          - Arn
+      Environment:
+        Variables:
+          TOKEN_SECRET: 1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ
+          API_KEY_MAPS: AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      FunctionName: tyba-V1-deleteSearch-development
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs14.x
+      Timeout: 15
+    DependsOn:
+      - deleteSearchServiceRoleDefaultPolicy2AFA8E0D
+      - deleteSearchServiceRole4A2CF168
+    Metadata:
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/deleteSearch/Resource
+      aws:asset:path: E:\akosoriod\Documents\Serverless\tyba\cdk.out\asset.b3ab49247d9c7375cdfb0aadffa5b0d5d836e0e536480a3cfafdd9054a3ba8ba
       aws:asset:is-bundled: true
       aws:asset:property: Code
   CDKMetadata:
@@ -423,18 +1297,18 @@ Resources:
     Properties:
       Analytics: v2:deflate64:H4sIAAAAAAAA/1VQy07EMAz8lr2nXioWcaW7K248tHxBSE1JH0lVO6yqqP9O3G4kOHk8M/E4LqE8PMDd7klfqTB1t4/GTwjxg7Xp1OnLvQUeA6uKCDmRjXWNOnlHPAXDYrgg+TAZXJSMiHq0jWa86hlikrga7c2VYWWMD47VGcfezwO6dcyfTmJQuA3kgKMmVC/I374W8Yay+n8Vq4cU7/uNlvrue2tmaTe0qF4Pn7WGKBROgyWy3onhOTjDCWdL4XyNLcHrWrKq6L7QchWC9Tiph2MwHbIsuixKXkFL+5/yAOUjlLuWrC2m9HU7IFy2+gtblhl2gAEAAA==
     Metadata:
-      aws:cdk:path: modak-V1-InfrastructureStack-development/CDKMetadata/Default
+      aws:cdk:path: tyba-V1-InfrastructureStack-development/CDKMetadata/Default
 Outputs:
-  modakV1ApidevelopmentEndpointAD3FBF7E:
+  tybaV1ApidevelopmentEndpoint60C82AF6:
     Value:
       Fn::Join:
         - ""
         - - https://
-          - Ref: modakV1Apidevelopment96DA8F45
+          - Ref: tybaV1Apidevelopment8EE8FE0F
           - .execute-api.us-east-1.
           - Ref: AWS::URLSuffix
           - /
-          - Ref: modakV1ApidevelopmentDeploymentStagedevelopment4BA90F53
+          - Ref: tybaV1ApidevelopmentDeploymentStageprodCADD5336
           - /
 Parameters:
   BootstrapVersion:
