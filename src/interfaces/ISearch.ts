@@ -3,6 +3,7 @@ export interface ISearch {
     lat: string;
     long: string;
     radius:string;
+    userEmail:string;
     results?: any[]
 
 }

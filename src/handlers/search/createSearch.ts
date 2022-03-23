@@ -4,9 +4,9 @@ import { Search } from "../../entities/search";
 import fetch from 'node-fetch';
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
-
+    const userEmail = "akod55@gmail.com"
     const { lat,long,radius} = JSON.parse(event.body || '{}');
-    const res = new Search({lat,long,radius});
+    const res = new Search({lat,long,radius,userEmail});
     const payment = await res.create();
    if (payment.hasOwnProperty("error")) {
            return getResponse({

@@ -8,11 +8,13 @@ export class Search implements ISearch {
     lat: string;
     long: string;
     radius: string;
+    userEmail: string;
     results: any;
     constructor(props: ISearch) {
         this.lat = props.lat;
         this.long = props.long;
         this.radius = props.radius;
+        this.userEmail = props.userEmail;
     }
 
     create = async (): Promise<any> => {
@@ -31,7 +33,7 @@ export class Search implements ISearch {
                 TableName: TABLE_NAME,
                 Item: {
                     PK: 'SEARCH',
-                    SK: 'USER#akod55@gmail.com',
+                    SK: 'USER#'+this.userEmail,
                     lat: this.lat,
                     long: this.long,
                     radius: this.radius,
