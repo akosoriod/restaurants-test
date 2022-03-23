@@ -1,5 +1,5 @@
 import { ISearch } from "../interfaces/ISearch";
-import { putItem } from "../helpers/dynamoHelper";
+import { getItem, putItem } from "../helpers/dynamoHelper";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 const TABLE_NAME: string = process.env.TABLE_NAME || "";
@@ -46,27 +46,22 @@ export class Search implements ISearch {
         }
     }
 
-    static getOrder = async (id: string): Promise<any> => {
-        try {
 
+    static getSearches = async (email:string): Promise<any> => {
+        const PK: string = "NFT";
+        const SK: string = "USER#"+email;
+        const params = {
+            Key: {
+                PK,
+                SK
+            },
+            TableName: TABLE_NAME,
+        };
+        try {
+            return await getItem(params)
         } catch (error) {
             return { error: error }
-        }
-    }
-    static delete = async (id: string): Promise<any> => {
-        try {
 
-        } catch (error) {
-            return { error: error }
-        }
-    }
-
-    static getOrders = async (start: string, number: string): Promise<any> => {
-
-        try {
-
-        } catch (error) {
-            return { error: error }
         }
     }
 }

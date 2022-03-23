@@ -40,7 +40,11 @@ export class TybaInfrastructureStack extends cdk.Stack {
             });
 
         const {
-            signup
+            signup,
+            signin,
+            logout,
+            searches,
+            createSearch
         } = lambdas;
 
         Object.keys(lambdas).forEach((lambdaFunctionKey: string) => {

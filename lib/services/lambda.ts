@@ -183,43 +183,13 @@ export const getLambdas = (
         {baseRoute: opt.routes.searchRoute, path: 'new', method: "POST"}
     );
 
-    const getSearch = () => getNodeLambdaFunction(
-        stack,
-        "getSearch",
-        "search/getSearch.ts",
-        env,
-        {
-            environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
-            }
-        },
-        {baseRoute: opt.routes.searchDetailRoute, path: '', method: "GET"}
-    );
 
-    const deleteSearch = () => getNodeLambdaFunction(
-        stack,
-        "deleteSearch",
-        "search/deleteSearch.ts",
-        env,
-        {
-            environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
-            }
-        },
-        {baseRoute: opt.routes.searchDetailRoute, path: '', method: "DELETE"}
-    );
     const allLambdas: { [key: string]: () => NodejsFunction } = {
         signup,
         signin,
         logout,
         searches,
-        createSearch,
-        getSearch,
-        deleteSearch
+        createSearch
     }
 
     return getFunctionsForSynth(allLambdas, opt.onlySynth || []);

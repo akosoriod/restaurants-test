@@ -3,9 +3,8 @@ import { getResponse } from "../../helpers/lambdaHelper";
 import { Search } from "../../entities/search";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
-    const start: string = event.queryStringParameters?.start || '0';
-    const number: string = event.queryStringParameters?.number || '10';
-    const orders = await Search.getOrders(start, number);
+    const userEmail = 'akod55@gmail.com';
+    const orders = await Search.getSearches(userEmail);
     if (orders.hasOwnProperty("error")) {
             return getResponse({
             statusCode: 400,
