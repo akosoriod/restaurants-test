@@ -1,6 +1,0 @@
-START RequestId: 41e4740d-ef32-40fd-84a0-ec781e90c285 Version: $LATEST
-END RequestId: 41e4740d-ef32-40fd-84a0-ec781e90c285
-REPORT RequestId: 41e4740d-ef32-40fd-84a0-ec781e90c285	Init Duration: 0.19 ms	Duration: 411.83 ms	Billed Duration: 500 ms	Memory Size: 128 MB	Max Memory Used: 128 MB	
-START RequestId: bdfce1d5-a442-4883-ab8d-ee4213c0df51 Version: $LATEST
-END RequestId: bdfce1d5-a442-4883-ab8d-ee4213c0df51
-REPORT RequestId: bdfce1d5-a442-4883-ab8d-ee4213c0df51	Init Duration: 0.11 ms	Duration: 446.30 ms	Billed Duration: 500 ms	Memory Size: 128 MB	Max Memory Used: 128 MB	

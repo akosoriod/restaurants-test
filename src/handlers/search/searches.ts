@@ -4,19 +4,19 @@ import { Search } from "../../entities/search";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
     const userEmail = 'akod55@gmail.com';
-    const orders = await Search.getSearches(userEmail);
-    if (orders.hasOwnProperty("error")) {
+    const searches = await Search.getSearches(userEmail);
+    if (searches.hasOwnProperty("error")) {
             return getResponse({
             statusCode: 400,
             body: {
-                error: orders.error
+                error: searches.error
             }
         })
     } else {
         return getResponse({
             statusCode: 200,
             body: {
-                orders
+                searches
             }
         })
     }

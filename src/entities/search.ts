@@ -41,8 +41,9 @@ export class Search implements ISearch {
                 },
                 ReturnValues: "ALL_NEW"
             }
-            await putItem(params);
-            return
+            let res = await putItem(params);
+            console.log (res);
+            return res
         } catch (error) {
             return { error: error }
         }
@@ -50,7 +51,7 @@ export class Search implements ISearch {
 
 
     static getSearches = async (email:string): Promise<any> => {
-        const PK: string = "NFT";
+        const PK: string = "SEARCH";
         const SK: string = "USER#"+email;
         const params = {
             Key: {

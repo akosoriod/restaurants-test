@@ -7,23 +7,22 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     const userEmail = "akod55@gmail.com"
     const { lat,long,radius} = JSON.parse(event.body || '{}');
     const res = new Search({lat,long,radius,userEmail});
-    const payment = await res.create();
-   if (payment.hasOwnProperty("error")) {
+    const result = await res.create();
+   if (result.hasOwnProperty("error")) {
            return getResponse({
            statusCode: 400,
            body: {
-               error: payment.error
+               error: result.error
            }
        })
    } else {
        return getResponse({
            statusCode: 201,
            body: {
-                payment
+            result
            }
        })
    } 
-   //} 
 
 }
 

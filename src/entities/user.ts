@@ -1,6 +1,8 @@
 import { IUser } from "../interfaces/IUser";
-import { getResponseValue } from "../helpers/utilsHelper";
+import { getItem, putItem } from "../helpers/dynamoHelper";
+import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
+const TABLE_NAME: string = process.env.TABLE_NAME || "";
 
 export class User implements IUser {
     name: string;
@@ -17,25 +19,26 @@ export class User implements IUser {
 
     create = async (): Promise<any> => {
         try {
-   
+            const params: DocumentClient.PutItemInput = {
+                TableName: TABLE_NAME,
+                Item: {
+                    PK: 'USER',
+                    SK: 'USER#'+this.email,
+                    name: this.name,
+                    email: this.email,
+                    address: this.address,
+                    password: this.password    
+                },
+                ReturnValues: "ALL_NEW"
+            }
+            let res = await putItem(params);
+            console.log (res);
+            return res
         } catch (error) {
             return { error: error }
         }
     }
-    edit = async (id: string): Promise<any> => {
-        try {
-                
-        } catch (error) {
-            return { error: error }
-        }
-    }
-    static getUser = async (id: string): Promise<any> => {
-        try {
 
-        } catch (error) {
-            return { error: error }
-        }
-    }
 
 }
 
