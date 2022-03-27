@@ -53,6 +53,9 @@ export class TybaInfrastructureStack extends cdk.Stack {
             },
         });
 
+        env.USER_POOL_CLIENT_ID = userPoolClient.userPoolClientId;
+        env.USER_POOL_ID = userPool.userPoolId;
+    
         // API GATEWAY
 
         const {
