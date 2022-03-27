@@ -30,12 +30,13 @@ export const getApiGatewayResources = (scope: cdk.Construct, env: any, opt?: any
         handler: 'handler',
         entry: authorizersDirectoryPath + 'authorizer.ts',
         environment: {
-            TABLE_NAME: env.TABLE_NAME,
+            TABLE_NAME: env.MAIN_TABLE_NAME,
         },
         bundling: {
             minify: true
         },
     });
+
 
     // 👇🏻 Grant Dynamo access to the authorizer
     authorizerFunction.addToRolePolicy(getIAMPolicy(["dynamodb:*"]));

@@ -57,9 +57,14 @@ export class User implements IUser {
         const signupCognitoParams: AWS.CognitoIdentityServiceProvider.Types.SignUpRequest = {
             ClientId,
             Username: this.email,
-            Password: this.password || ""
+            Password: this.password || "",
+            UserAttributes: [
+                {
+                    Name: "email",
+                    Value: this.email
+                }
+            ]
         }
-        console.log(ClientId);
         this.signUpCognito(signupCognitoParams)
             .then((results) => resolve(results))
             .catch((error) => reject(error))

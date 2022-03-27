@@ -63,14 +63,14 @@ export const handler: APIGatewayAuthorizerHandler = (
       "TableName": TableName,
       "ScanIndexForward": true,
       "IndexName": "Inverted",
-      "KeyConditionExpression": "#cd420 = :cd420 And #cd421 = :cd421",
+      "KeyConditionExpression": "#cd420 = :cd420 AND #cd421 = :cd421",
       "ExpressionAttributeValues": {
         ":cd420": "USER",
         ":cd421": `USER#${decodedToken.email}`,
       },
       "ExpressionAttributeNames": {
-        "#cd420": "SK",
-        "#cd421": "PK"
+        "#cd420": "PK",
+        "#cd421": "SK"
       }
     }
 

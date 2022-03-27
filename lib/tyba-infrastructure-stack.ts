@@ -3,9 +3,7 @@ import { getIAMPolicy } from "./services/iam";
 import { getLambdas } from "./services/lambda";
 import * as cognito from "@aws-cdk/aws-cognito";
 import { getApiGatewayResources } from "./services/apiGateway";
-import * as lambdaEventSources from '@aws-cdk/aws-lambda-event-sources';
-import { UserPool } from "@aws-cdk/aws-cognito";
-import { CfnAuthorizer } from '@aws-cdk/aws-apigateway';
+import { VerificationEmailStyle} from '@aws-cdk/aws-cognito'
 import { RemovalPolicy } from 'aws-cdk-lib';
 
 
@@ -17,8 +15,12 @@ export class TybaInfrastructureStack extends cdk.Stack {
         const userPool = new cognito.UserPool(this, env.USER_POOL_NAME, {
             userPoolName: env.USER_POOL_NAME,
             selfSignUpEnabled: true,
-            signInAliases: {
-                username: false
+            signInAliases: { username: false, email: true },
+            autoVerify: {
+                email: true,
+            },
+            userVerification: {
+                emailStyle: VerificationEmailStyle.LINK
             },
             standardAttributes: {
                 email: { required: true, mutable: true },
@@ -42,7 +44,7 @@ export class TybaInfrastructureStack extends cdk.Stack {
                     cognito.OAuthScope.OPENID,
                     cognito.OAuthScope.EMAIL
                 ],
-                callbackUrls: ["https://example.com"],
+                callbackUrls:  [env.LOGOUT_URL],
                 logoutUrls: [env.LOGOUT_URL],
             }
         })
