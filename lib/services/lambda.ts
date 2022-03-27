@@ -178,12 +178,11 @@ export const getLambdas = (
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
                 API_KEY_MAPS: env.API_KEY_MAPS,
             }
         },
         {baseRoute: opt.routes.searchesRoute, path: '', method: "GET"},
-        opt.authorizer,
+        opt.authorizer
     );
 
     const createSearch = () => getNodeLambdaFunction(
@@ -194,11 +193,11 @@ export const getLambdas = (
         {
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
-                TOKEN_SECRET: env.TOKEN_SECRET,
                 API_KEY_MAPS: env.API_KEY_MAPS
             }
         },
-        {baseRoute: opt.routes.searchRoute, path: 'new', method: "POST"}
+        {baseRoute: opt.routes.searchRoute, path: 'new', method: "POST"},
+        opt.authorizer
     );
 
 

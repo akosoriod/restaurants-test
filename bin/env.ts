@@ -34,7 +34,6 @@ const getEnvVariables = (dependentVariables: any) => {
     const USER_POOL_NAME = `${PROJECT_NAME}-V${PROJECT_VERSION}-User-Pool-${PROJECT_ENVIRONMENT}`;
     const USER_POOL_CLIENT_NAME = `${PROJECT_NAME}-V${PROJECT_VERSION}-User-Pool-Client-${PROJECT_ENVIRONMENT}`;
     const MAIN_TABLE_NAME = `${PROJECT_NAME}-V${PROJECT_VERSION}-MainTable-${PROJECT_ENVIRONMENT}`;
-    const TOKEN_SECRET=`1W5q6rhnxY4fAywpQdvgAs4KYzmsU629VnOMUnfXM3yhDqRHRqO26sjdIJBxpxHJ`;
     const API_KEY_MAPS=`AIzaSyAleTOP47ClaPq8hRB5UsZxO1cP6rFupI8`;
     const LOGOUT_URL = `https://github.com/akosoriod/restaurants-test`;
     
@@ -52,7 +51,6 @@ const getEnvVariables = (dependentVariables: any) => {
         USER_POOL_NAME,
         USER_POOL_CLIENT_NAME,
         MAIN_TABLE_NAME,
-        TOKEN_SECRET,
         API_KEY_MAPS,
         LOGOUT_URL
     }

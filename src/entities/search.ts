@@ -2,9 +2,10 @@ import { ISearch } from "../interfaces/ISearch";
 import { getItem, putItem, queryTable } from "../helpers/dynamoHelper";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import fetch from "node-fetch";
+import { AnyNaptrRecord } from "dns";
 
 const TABLE_NAME: string = process.env.TABLE_NAME || "";
-
+const API_KEY_MAPS: string = process.env.API_KEY_MAPS || "";
 export class Search implements ISearch {
     lat: string;
     long: string;
@@ -22,8 +23,8 @@ export class Search implements ISearch {
         const types = "restaurant";
         const date = Date.now();
         try {
-            const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + this.lat + "," + this.long + "&radius=" + this.radius + "&types=" + types + "&key=" + process.env.API_KEY_MAPS;
-            const restaurants = await fetch(url)
+            const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + this.lat + "," + this.long + "&radius=" + this.radius + "&types=" + types + "&key=" + API_KEY_MAPS;
+            const mapsResult:any = await fetch(url)
                 .then(res => res.json())
                 .catch(e => {
                     console.error({
@@ -31,11 +32,17 @@ export class Search implements ISearch {
                         error: e,
                     });
                 });
+
+            let restaurants: any = [];
+            mapsResult.results.forEach(function (element:any) {
+                restaurants.push({ name: element.name, types: element.types, address: element.vicinity });
+            });
+            
             const params: DocumentClient.PutItemInput = {
                 TableName: TABLE_NAME,
                 Item: {
                     PK: 'SEARCH',
-                    SK: 'USER#'+this.userEmail+'#'+date,
+                    SK: 'USER#' + this.userEmail + '#' + date,
                     lat: this.lat,
                     long: this.long,
                     radius: this.radius,
@@ -47,7 +54,7 @@ export class Search implements ISearch {
                 TableName: TABLE_NAME,
                 Key: {
                     PK: 'SEARCH',
-                    SK: 'USER#'+this.userEmail+'#'+date
+                    SK: 'USER#' + this.userEmail + '#' + date
                 }
             }
             let res = getItem(params2);
@@ -58,19 +65,19 @@ export class Search implements ISearch {
     }
 
 
-    static getSearches = async (email:string): Promise<any> => {
+    static getSearches = async (email: string): Promise<any> => {
         const PK: string = "SEARCH";
-        const SK: string = "USER#"+email;
-        const params:DocumentClient.QueryInput = {
+        const SK: string = "USER#" + email;
+        const params: DocumentClient.QueryInput = {
             TableName: TABLE_NAME,
             KeyConditionExpression: "#pk = :pk AND begins_with(#sk, :sk)",
             ExpressionAttributeValues: {
-              ":pk": "SEARCH",
-              ":sk": "USER#"+email
+                ":pk": "SEARCH",
+                ":sk": "USER#" + email
             },
             ExpressionAttributeNames: {
-              "#pk": "PK",
-              "#sk": "SK"
+                "#pk": "PK",
+                "#sk": "SK"
             }
         };
         try {
