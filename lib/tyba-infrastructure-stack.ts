@@ -1,66 +1,71 @@
 import * as cdk from '@aws-cdk/core';
-import {getLambdas} from "./services/lambda";
-import {getIAMPolicy} from "./services/iam";
-import {getApiGatewayResources} from "./services/apiGateway";
+import { getIAMPolicy } from "./services/iam";
+import { getLambdas } from "./services/lambda";
+import * as cognito from "@aws-cdk/aws-cognito";
+import { getApiGatewayResources } from "./services/apiGateway";
+import * as lambdaEventSources from '@aws-cdk/aws-lambda-event-sources';
+import { UserPool } from "@aws-cdk/aws-cognito";
+import { CfnAuthorizer } from '@aws-cdk/aws-apigateway';
+import { RemovalPolicy } from 'aws-cdk-lib';
+
 
 export class TybaInfrastructureStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, env: any, props?: cdk.StackProps) {
-
         super(scope, id, props);
 
-       /*
-        const jwksUri = ssm.StringParameter.fromStringParameterAttributes(
-            this,
-            'jwksURI',
-            {
-                parameterName: 'https://akod.us.auth0.com/.well-known/jwks.json',
+        // COGNITO
+        const userPool = new cognito.UserPool(this, env.USER_POOL_NAME, {
+            userPoolName: env.USER_POOL_NAME,
+            selfSignUpEnabled: true,
+            signInAliases: {
+                username: false
             },
-        ).stringValue;
-
-        const audience = ssm.StringParameter.fromStringParameterAttributes(
-            this,
-            'audience',
-            {
-                parameterName: 'https://0sdrvcpvi4.execute-api.us-east-1.amazonaws.com',
+            standardAttributes: {
+                email: { required: true, mutable: true },
             },
-        ).stringValue;
+            removalPolicy: RemovalPolicy.DESTROY
+        });
 
-        const tokenIssuer = ssm.StringParameter.fromStringParameterAttributes(
-            this,
-            'tokenIssuer',
-            {
-                parameterName: 'https://akod.us.auth0.com/',
+        const userPoolClient = new cognito.UserPoolClient(this, 'app-client', {
+            authFlows: {
+                userPassword: true,
+                userSrp: true,
             },
-        ).stringValue;
-
-        // Lambda Authorizer
-        const auth0AuthorizerFunction = new lambda.Function(
-            this,
-            'auth0AuthorizerFunction',
-            {
-                runtime: lambda.Runtime.NODEJS_12_X,
-                code: lambda.Code.fromAsset(NODE_LAMBDA_SRC_DIR),
-                handler: 'auth/authorizer.handler',
-                layers: [nodeModuleLayer],
-                environment: {
-                    JWKS_URI: jwksUri,
-                    AUDIENCE: audience,
-                    TOKEN_ISSUER: tokenIssuer,
+            userPoolClientName: env.USER_POOL_CLIENT_NAME,
+            userPool,
+            oAuth: {
+                flows: {
+                    implicitCodeGrant: true,
+                    authorizationCodeGrant: true,
                 },
+                scopes: [
+                    cognito.OAuthScope.OPENID,
+                    cognito.OAuthScope.EMAIL
+                ],
+                callbackUrls: ["https://example.com"],
+                logoutUrls: [env.LOGOUT_URL],
+            }
+        })
+    
+        userPool.addDomain('CognitoDomain', {
+            cognitoDomain: {
+                domainPrefix: env.USER_POOL_NAME.toLowerCase(),
             },
-        );
-        */
+        });
+
         // API GATEWAY
 
         const {
             versionRoute,
+            authorizer,
             signupRoute,
             signinRoute,
             logoutRoute,
             searchesRoute,
             searchRoute,
             searchDetailRoute
-        } = getApiGatewayResources(this, env);
+        } = getApiGatewayResources(this, env, { userPool }
+        );
 
         // LAMBDAS
 
@@ -77,7 +82,8 @@ export class TybaInfrastructureStack extends cdk.Stack {
                     searchesRoute,
                     searchRoute,
                     searchDetailRoute
-                }
+                },
+                authorizer
             });
 
         const {
@@ -91,6 +97,9 @@ export class TybaInfrastructureStack extends cdk.Stack {
         Object.keys(lambdas).forEach((lambdaFunctionKey: string) => {
             const lambdaFunction = lambdas[lambdaFunctionKey];
             lambdaFunction.addToRolePolicy(getIAMPolicy(["dynamodb:*"]));
+            lambdaFunction.addToRolePolicy(getIAMPolicy(["cognito-idp:*"]));
+            
+
         })
     }
 }

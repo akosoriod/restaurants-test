@@ -1,8 +1,13 @@
+import * as AWS from "aws-sdk";
 import { IUser } from "../interfaces/IUser";
 import { getItem, putItem } from "../helpers/dynamoHelper";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 const TABLE_NAME: string = process.env.TABLE_NAME || "";
+const ClientId = process.env.USER_POOL_CLIENT_ID || "";
+const UserPoolId = process.env.USER_POOL_ID || "";
+
+const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
 
 export class User implements IUser {
     name: string;
@@ -31,7 +36,8 @@ export class User implements IUser {
                 },
                 ReturnValues: "ALL_OLD"
             }
-            await putItem(params);
+            await putItem(params); //save in dynamoDB
+            await this.saveCognito(); //save in cognito
             const params2: DocumentClient.GetItemInput = {
                 TableName: TABLE_NAME,
                 Key: {
@@ -46,6 +52,26 @@ export class User implements IUser {
         }
     }
 
+    saveCognito = (email_verified = false) =>
+    new Promise((resolve, reject) => {
+        const signupCognitoParams: AWS.CognitoIdentityServiceProvider.Types.SignUpRequest = {
+            ClientId,
+            Username: this.email,
+            Password: this.password || ""
+        }
+        console.log(ClientId);
+        this.signUpCognito(signupCognitoParams)
+            .then((results) => resolve(results))
+            .catch((error) => reject(error))
+    })
 
+    signUpCognito = (params: AWS.CognitoIdentityServiceProvider.Types.SignUpRequest) =>
+    new Promise((resolve, reject) => {
+        cognitoIdentityServiceProvider
+            .signUp(params)
+            .promise()
+            .then((results) => resolve(results))
+            .catch((error) => reject(error))
+    })
 }
 

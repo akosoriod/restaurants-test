@@ -1,14 +1,8 @@
 import * as AWS from "aws-sdk";
 import {DocumentClient} from "aws-sdk/clients/dynamodb";
 
-let clientOptions = {};
-const endpoint = process.env.LOCAL_STACK_ENDPOINT;
-if (endpoint) {
-    clientOptions = {
-        endpoint,
-    }
-}
-const dynamo = new AWS.DynamoDB.DocumentClient(clientOptions);
+
+const dynamo = new AWS.DynamoDB.DocumentClient();
 
 export const getItem = (params: DocumentClient.GetItemInput): Promise<DocumentClient.GetItemOutput> =>
     new Promise((resolve, reject) => {

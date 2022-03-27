@@ -6,6 +6,7 @@ import {Resource} from "@aws-cdk/aws-apigateway/lib/resource";
 import {NodejsFunction} from "@aws-cdk/aws-lambda-nodejs";
 import {Construct} from "@aws-cdk/core";
 import {NodejsFunctionProps} from "@aws-cdk/aws-lambda-nodejs/lib/function";
+import { AuthorizationType, Authorizer, MethodOptions } from "@aws-cdk/aws-apigateway";
 
 const handlersDirectoryPath = path.join(__dirname, `./../../src/handlers/`)
 
@@ -27,30 +28,44 @@ const getFunctionsForSynth = (
 
     return lambdasForSynth;
 }
-
 const addLambdaToRoute = (
     lambdaFunction: NodejsFunction,
-    baseRoute: Resource,
-    method: string
+    baseRoute: apiGateway.Resource,
+    method: string,
+    authorizer?: Authorizer
 ) => {
+
+    let methodOptions: MethodOptions;
+    if (authorizer) {
+        methodOptions = {
+            authorizationType: AuthorizationType.CUSTOM,
+            authorizer
+        }
+    } else {
+        methodOptions = {}
+    }
+
     baseRoute.addMethod(
         method,
-        new apiGateway.LambdaIntegration(lambdaFunction, {proxy: true})
+        new apiGateway.LambdaIntegration(lambdaFunction, {proxy: true}),
+        methodOptions
     )
 }
 
 const addLambdaToNewRoute = (
     lambdaFunction: NodejsFunction,
-    baseRoute: Resource,
+    baseRoute: apiGateway.Resource,
     path: string,
-    method: string
+    method: string,
+    authorizer?: Authorizer
 ) => {
     const newRoute = baseRoute.addResource(path);
 
     addLambdaToRoute(
         lambdaFunction,
         newRoute,
-        method
+        method,
+        authorizer
     )
 }
 
@@ -64,8 +79,13 @@ const getNodeLambdaFunction =
          baseRoute: Resource,
          method: string,
          path?: string,
-     }
+     },
+     authorizer?: Authorizer
     ) => {
+        const fixedEnvironmentVariables = {
+            PROJECT_ENVIRONMENT: env.PROJECT_ENVIRONMENT,
+            TABLE_NAME: env.TABLE_NAME,
+        }
         const lambdaFunction = new NodejsFunction(scope, functionName, {
             functionName: `${env.PROJECT_NAME}-V${env.PROJECT_VERSION}-${functionName}-${env.PROJECT_ENVIRONMENT}`,
             memorySize: remainingProps?.memorySize || 128,
@@ -73,10 +93,9 @@ const getNodeLambdaFunction =
             runtime: remainingProps?.runtime || lambda.Runtime.NODEJS_14_X,
             handler: remainingProps?.handler || 'handler',
             entry: handlersDirectoryPath + handlerPathFromHandlers,
-            environment: remainingProps?.environment,
+            environment: {...fixedEnvironmentVariables, ...remainingProps?.environment},
             bundling: {
                 minify: true,
-                externalModules: ['aws-sdk']
             },
         })
 
@@ -86,13 +105,15 @@ const getNodeLambdaFunction =
                     lambdaFunction,
                     routeConfig.baseRoute,
                     routeConfig.path,
-                    routeConfig.method
+                    routeConfig.method,
+                    authorizer
                 );
             } else {
                 addLambdaToRoute(
                     lambdaFunction,
                     routeConfig.baseRoute,
-                    routeConfig.method
+                    routeConfig.method,
+                    authorizer
                 )
             }
 
@@ -114,7 +135,9 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                USER_POOL_ID: env.USER_POOL_ID,
+                USER_POOL_CLIENT_ID: env.USER_POOL_CLIENT_ID
             }
         },
         {baseRoute: opt.routes.signupRoute, path: '', method: "POST"}
@@ -156,10 +179,11 @@ export const getLambdas = (
             environment: {
                 TABLE_NAME: env.MAIN_TABLE_NAME,
                 TOKEN_SECRET: env.TOKEN_SECRET,
-                API_KEY_MAPS: env.API_KEY_MAPS
+                API_KEY_MAPS: env.API_KEY_MAPS,
             }
         },
-        {baseRoute: opt.routes.searchesRoute, path: '', method: "GET"}
+        {baseRoute: opt.routes.searchesRoute, path: '', method: "GET"},
+        opt.authorizer,
     );
 
     const createSearch = () => getNodeLambdaFunction(
