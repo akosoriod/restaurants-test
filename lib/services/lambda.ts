@@ -150,7 +150,9 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                USER_POOL_ID: env.USER_POOL_ID,
+                USER_POOL_CLIENT_ID: env.USER_POOL_CLIENT_ID
             }
         },
         {baseRoute: opt.routes.signinRoute, path: '', method: "POST"}
@@ -163,7 +165,9 @@ export const getLambdas = (
         env,
         {
             environment: {
-                TABLE_NAME: env.MAIN_TABLE_NAME
+                TABLE_NAME: env.MAIN_TABLE_NAME,
+                USER_POOL_ID: env.USER_POOL_ID,
+                USER_POOL_CLIENT_ID: env.USER_POOL_CLIENT_ID
             }
         },
         {baseRoute: opt.routes.logoutRoute, path: '', method: "POST"}
