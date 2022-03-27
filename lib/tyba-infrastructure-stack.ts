@@ -30,6 +30,7 @@ export class TybaInfrastructureStack extends cdk.Stack {
 
         const userPoolClient = new cognito.UserPoolClient(this, 'app-client', {
             authFlows: {
+                adminUserPassword: true,
                 userPassword: true,
                 userSrp: true,
             },

@@ -32,7 +32,6 @@ export class User implements IUser {
                     name: this.name,
                     email: this.email,
                     address: this.address,
-                    password: this.password  //cifrar
                 },
                 ReturnValues: "ALL_OLD"
             }
