@@ -18,5 +18,5 @@
 
 
 ## Diagram cloud serverless architecture
-<p align="center"><img src="<p align="center"><img src="https://raw.githubusercontent.com/akosoriod/restaurants-test/main/docs/AWS_diagram.png"></p>
+<p align="center"><img src="<p align="center"><img src="https://raw.githubusercontent.com/akosoriod/restaurants-test/main/docs/AWS_diagram2.png"></p>
 
