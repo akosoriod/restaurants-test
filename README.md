@@ -1,7 +1,8 @@
 # Welcome to tyba app - API
 
-*  https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=3a6ieh954hfkau517snbjj65aj&redirect_uri=https://github.com/akosoriod/restaurants-test
-*  https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/logout?response_type=token&client_id=3a6ieh954hfkau517snbjj65aj&redirect_uri=https://github.com/akosoriod/restaurants-test
+## Cognito links
+* https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=6cp9lf58jm6b81oa8vp3g1i2m2&redirect_uri=https://github.com/akosoriod/restaurants-test
+* https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/logout?response_type=token&client_id=6cp9lf58jm6b81oa8vp3g1i2m2&redirect_uri=https://github.com/akosoriod/restaurants-test
 
 ## Run Local
 
@@ -14,6 +15,7 @@
 ## Deploy in AWS
 * `cdk deploy Infrastructure-omni-V1-Stack-development` deploy infrastructure stack to your default AWS account/region
 * `cdk deploy Pipeline-omni-V1-Stack-development`       deploy pipeline stack to your default AWS account/region
+
 
 ## Diagram cloud serverless architecture
 <p align="center"><img src="<p align="center"><img src="https://raw.githubusercontent.com/akosoriod/restaurants-test/main/docs/AWS_diagram.png"></p>
