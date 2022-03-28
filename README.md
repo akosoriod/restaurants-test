@@ -1,8 +1,8 @@
 # Welcome to tyba app - API
 
+*  https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=3a6ieh954hfkau517snbjj65aj&redirect_uri=https://github.com/akosoriod/restaurants-test
+*  https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/logout?response_type=token&client_id=3a6ieh954hfkau517snbjj65aj&redirect_uri=https://github.com/akosoriod/restaurants-test
 
-* endpoint_example: [API](https://fvs1m6rc69.execute-api.us-east-1.amazonaws.com/prod/v1/searches)
-  
 ## Run Local
 
 * `cdk synth Infrastructure-omni-V1-Stack-development > template.yaml`  build proyect and generate yaml architecture file

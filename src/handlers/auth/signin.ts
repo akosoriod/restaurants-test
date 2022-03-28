@@ -17,7 +17,9 @@ export const handler: APIGatewayProxyHandler = (event: APIGatewayProxyEvent): Pr
               PASSWORD: password
             }
           }
-          const dataSession = await cognitoClientId.initiateAuth(payload).promise();
+        console.log(ClientId); 
+        const dataSession = await cognitoClientId.initiateAuth(payload).promise();
+        console.log(dataSession);
         return getResponse({
             statusCode: 400,
             body: {

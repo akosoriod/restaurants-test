@@ -9,9 +9,12 @@ import {
 import jwtDecode from "jwt-decode";
 import {DocumentClient} from "aws-sdk/clients/dynamodb";
 import {queryTable} from '../helpers/dynamoHelper';
-  
+import { CognitoJwtVerifier } from "aws-jwt-verify";
+
 const BEARER_TOKEN_REGEX = /Bearer (.*)/;
 const TableName = process.env.TABLE_NAME || "";
+const ClientId = process.env.USER_POOL_CLIENT_ID || "";
+const UserPoolId = process.env.USER_POOL_ID || "";
 
 function generatePolicyDocument(effect: string, methodArn: string) {
   if (!effect || !methodArn) return null
@@ -41,7 +44,7 @@ export const handler: APIGatewayAuthorizerHandler = (
   event: APIGatewayAuthorizerEvent,
   context: Context,
   callback: Callback,
-): Promise<APIGatewayAuthorizerResult> => new Promise((resolve, reject) => {
+): Promise<APIGatewayAuthorizerResult> => new Promise(async (resolve, reject) => {
   const methodArn = event.methodArn;
   try {
     const cleanToken = BEARER_TOKEN_REGEX.exec((event as APIGatewayTokenAuthorizerEvent).authorizationToken)?.[1];
@@ -55,6 +58,22 @@ export const handler: APIGatewayAuthorizerHandler = (
       console.log('Denied access');
       callback(null, generateAuthResponse('user', 'Deny', methodArn));
       return;
+    }
+
+    // Verifier that expects valid access tokens:
+    const verifier = CognitoJwtVerifier.create({
+      userPoolId: UserPoolId,
+      tokenUse: "access",
+      clientId: ClientId,
+    });
+    
+    try {
+      const payload = await verifier.verify(
+        cleanToken
+      );
+      console.log("Token is valid. Payload:", payload);
+    } catch {
+      console.log("Token not valid!");
     }
 
     console.log('decodedToken', decodedToken)

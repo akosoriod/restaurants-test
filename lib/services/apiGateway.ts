@@ -12,13 +12,15 @@ export const getApiGatewayResources = (scope: cdk.Construct, env: any, opt?: any
         restApiName: env.API_NAME,
         deployOptions: {
             stageName: env.API_STAGE_NAME,
+            cachingEnabled:false
         },
         defaultCorsPreflightOptions: {
             allowHeaders: apiGateway.Cors.DEFAULT_HEADERS,
             allowMethods: apiGateway.Cors.ALL_METHODS,
             allowCredentials: true,
             allowOrigins: apiGateway.Cors.ALL_ORIGINS,
-        },
+        }
+        
     });
 
     // 👇🏻 Authorizer function
@@ -31,6 +33,8 @@ export const getApiGatewayResources = (scope: cdk.Construct, env: any, opt?: any
         entry: authorizersDirectoryPath + 'authorizer.ts',
         environment: {
             TABLE_NAME: env.MAIN_TABLE_NAME,
+            USER_POOL_ID: env.USER_POOL_ID,
+            USER_POOL_CLIENT_ID: env.USER_POOL_CLIENT_ID
         },
         bundling: {
             minify: true

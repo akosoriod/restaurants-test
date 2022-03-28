@@ -5,6 +5,7 @@ import { getEmail } from "../../helpers/authorizationHelper";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
     const userEmail:string = await getEmail(event);
+    console.log(userEmail);
     const { lat,long,radius} = JSON.parse(event.body || '{}');
     const res = new Search({lat,long,radius,userEmail});
     const result = await res.create();
