@@ -1,4 +1,4 @@
-# Welcome to tyba app - API
+# Welcome to restaurants app - API
 
 ## Cognito links
 * https://tyba-v1-user-pool-development.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=6cp9lf58jm6b81oa8vp3g1i2m2&redirect_uri=https://github.com/akosoriod/restaurants-test
